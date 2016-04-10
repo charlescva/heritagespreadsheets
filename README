@@ -1,0 +1,13 @@
+1.) python-3.5.0.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+
+
+2.) C:\Users\Charles\AppData\Local\Programs\Python\Python35-32\python.exe C:\Users\Charles\Documents\get-pip.py
+
+3.) Set PYTHON_HOME=C:\Users\Charles\AppData\Local\Programs\Python\Python35-32
+(Or wherever you installed python)
+
+4.) Set PATH=%PATH%:%PYTHON_HOME%
+
+5.) %PYTHON_HOME%\Scripts\pip install oauth2client pyopenssl gspread google-api-python-client Django
+
+6.) run 'python manage.py runserver'
