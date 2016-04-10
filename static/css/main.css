@@ -11,7 +11,7 @@
    ========================================================================== */
 
 div.chart {
-    
+
     display: inline-block;
 }
 
@@ -20,6 +20,14 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+}
+
+body {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(bottom,rgba(0,128,240,0),rgba(120,128,240,1)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(bottom,rgba(0,128,240,0),rgba(120,128,240,1)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(bottom,rgba(0,128,240,0),rgba(120,128,240,1)); /*Fx 3.6-15*/
+  background: linear-gradient(to bottom, rgba(0,128,240,0), rgba(120,128,240,1)); /*Standard*/
 }
 
 /*

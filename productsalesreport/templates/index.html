@@ -23,15 +23,18 @@
 
 <!-- Add your site or application content here -->
 <p>Python, Google Sheets API, Django Framework, HTML5 Presents...</p>
-<table border="1" width="200px">
+
+<div class="chart">
+<table width="200px" cellpadding="2px" cellspacing="2px">
     {% for key, value in data %}
     <tr>
-        <td> {{ key }}:</td>
+        <td align="right">{{ key }}: </td>
         <td>${{ value }}</td>
     </tr>
     {% endfor %}
+    <tr style="border-top:5pt double black"><td align="right" style="font-weight: bold">Total Sales: </td><td><b>${{ totalSales }}</b></td></tr>
 </table>
-
+</div>
 
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
@@ -56,10 +59,10 @@
 		labels : [{% for key, value in data %}"{{ key }}",{% endfor %}],
 		datasets : [
 			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,0.8)",
-				highlightFill: "rgba(120,120,120,0.55)",
-				highlightStroke: "rgba(220,220,220,1)",
+				fillColor : "rgba(120,120,120,0.5)",
+				strokeColor : "rgba(120,120,120,0.8)",
+				highlightFill: "rgba(100,100,100,0.55)",
+				highlightStroke: "rgba(120,120,120,1)",
 				data : [{% for key, value in data %}"{{ value }}",{% endfor %}]
 			}
 		]
@@ -70,8 +73,8 @@
 	{% for key, value in data %}
 			{
 				value: {{ value }},
-				color: "rgba(220,220,220,0.5)",
-				highlight: "rgba(120,120,120,0.55)",
+				color: "rgba(120,120,120,0.5)",
+				highlight: "rgba(100,100,100,0.55)",
 				label: "{{ key }}"
 			},
 			{% endfor %}
@@ -82,12 +85,12 @@
 		datasets: [
 			{
 				label: "My First dataset",
-				fillColor: "rgba(220,220,220,0.2)",
+				fillColor: "rgba(120,120,120,0.2)",
 				strokeColor: "rgba(220,220,220,1)",
 				pointColor: "rgba(220,220,220,1)",
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(220,220,220,1)",
+				pointHighlightStroke: "rgba(100,100,100,1)",
 				data : [{% for key, value in data %}"{{ value }}",{% endfor %}]
 			}
 		]

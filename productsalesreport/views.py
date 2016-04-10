@@ -5,6 +5,11 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from re import sub
 from decimal import Decimal
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 def sheet_total(worksheet):
@@ -12,15 +17,15 @@ def sheet_total(worksheet):
     total_sales = Decimal('0.00')
     row_iter = iter(list_from_worksheet)
     # Skip Header
-    print(next(row_iter))
+    logger.info(next(row_iter))
 
     for row in row_iter:
         if str(row[0]):
-            print(row[0] + '(SKU:' + row[1] + ')' + row[4])
+            logger.info(row[0] + ' (SKU:' + row[1] + ') ' + row[4])
             total_sales += Decimal(sub(r'[^\d.]', '', row[4]))
 
-    print("========================")
-    print("Total Sales: $" + str(total_sales))
+    logger.info("========================")
+    logger.info("Total Sales: $" + str(total_sales))
     return total_sales
 
 
@@ -34,7 +39,10 @@ def index(request):
     sheet_service = gspread.authorize(get_credentials())
     sheetiter = iter(sheet_service.open('ProductSalesReport').worksheets())
     workbook_totals = {}
+    workbook_total_sales = Decimal('0.00')
     for worksheet in sheetiter:
-        workbook_totals[str(worksheet.title)] = sheet_total(worksheet)
+        worksheet_total = sheet_total(worksheet);
+        workbook_total_sales += worksheet_total
+        workbook_totals[str(worksheet.title)] = worksheet_total
 
-    return render(request, 'index.html', {'data': sorted(workbook_totals.items())})
+    return render(request, 'index.html', {'data': sorted(workbook_totals.items()), 'totalSales': workbook_total_sales})
