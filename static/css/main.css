@@ -10,6 +10,12 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
+div.chart {
+    
+    display: inline-block;
+}
+
+
 html {
     color: #222;
     font-size: 1em;
@@ -279,4 +285,5 @@ textarea {
     h3 {
         page-break-after: avoid;
     }
+}
 }

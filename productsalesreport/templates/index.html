@@ -32,17 +32,25 @@
     {% endfor %}
 </table>
 
+
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
 <script src="/static/js/plugins.js"></script>
 <script src="/static/js/main.js"></script>
 
-		<div style="width: 50%">
-			<canvas id="canvas" height="450" width="600"></canvas>
-		</div>
+<div class="chart">
+    <canvas id="bar-canvas" height="450" width="300"/>
+</div>
+<div class="chart">
+    <canvas id="pie-chart-area" height="450" width="300" />
+</div>
+<div class="chart">
+	<canvas id="radar-canvas" height="450" width="300"/>
+</div>
+
+<script>
 
 
-	<script>
 	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 	var barChartData = {
 		labels : [{% for key, value in data %}"{{ key }}",{% endfor %}],
@@ -56,14 +64,47 @@
 			}
 		]
 	}
-	window.onload = function(){
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myBar = new Chart(ctx).Bar(barChartData, {
-			responsive : true
-		});
-	}
-	</script>
 
+
+	var pieData = [
+	{% for key, value in data %}
+			{
+				value: {{ value }},
+				color: "rgba(220,220,220,0.5)",
+				highlight: "rgba(120,120,120,0.55)",
+				label: "{{ key }}"
+			},
+			{% endfor %}
+	];
+
+	var radarChartData = {
+		labels : [{% for key, value in data %}"{{ key }}",{% endfor %}],
+		datasets: [
+			{
+				label: "My First dataset",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data : [{% for key, value in data %}"{{ value }}",{% endfor %}]
+			}
+		]
+	};
+
+	window.onload = function(){
+		var piectx = document.getElementById("pie-chart-area").getContext("2d");
+		window.myPie = new Chart(piectx).Pie(pieData);
+		var barctx = document.getElementById("bar-canvas").getContext("2d");
+		window.myBar = new Chart(barctx).Bar(barChartData, { responsive : true });
+	    window.myRadar = new Chart(document.getElementById("radar-canvas").getContext("2d")).Radar(radarChartData, {
+			responsive: true
+		});
+	};
+
+
+</script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <!--<script>
