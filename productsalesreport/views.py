@@ -17,15 +17,15 @@ def sheet_total(worksheet):
     total_sales = Decimal('0.00')
     row_iter = iter(list_from_worksheet)
     # Skip Header
-    logger.info(next(row_iter))
+    logger.debug(next(row_iter))
 
     for row in row_iter:
         if str(row[0]):
-            logger.info(row[0] + ' (SKU:' + row[1] + ') ' + row[4])
+            logger.debug(row[0] + ' (SKU:' + row[1] + ') ' + row[4])
             total_sales += Decimal(sub(r'[^\d.]', '', row[4]))
 
-    logger.info("========================")
-    logger.info("Total Sales: $" + str(total_sales))
+    logger.debug("========================")
+    logger.debug("Total Sales: $" + str(total_sales))
     return total_sales
 
 
