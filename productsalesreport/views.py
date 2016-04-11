@@ -1,10 +1,9 @@
 from django.shortcuts import render
 
 #  Charlie's Python for Kris' Google Sheets API.
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from re import sub
 from decimal import Decimal
+from . import models
 # import the logging library
 import logging
 
@@ -29,14 +28,12 @@ def sheet_total(worksheet):
     return total_sales
 
 
-def get_credentials():
-    scopes = ['https://spreadsheets.google.com/feeds']
-    return ServiceAccountCredentials.from_json_keyfile_name(
-        'heritageSpreadsheets.json', scopes)
+
 
 
 def index(request):
-    sheet_service = gspread.authorize(get_credentials())
+
+    sheet_service = models.GoogleSheetsService.sheet_service
     sheetiter = iter(sheet_service.open('ProductSalesReport').worksheets())
     workbook_totals = {}
     workbook_total_sales = Decimal('0.00')

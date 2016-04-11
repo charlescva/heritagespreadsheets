@@ -25,6 +25,7 @@ SECRET_KEY = '75@p&k@%=+glrsma6aw1&e8dj=f!%jxfr)g*9@l6911h3x6&hb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Logging information
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -70,6 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'productsalesreport'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -84,8 +86,6 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'heritagespreadsheets.urls'
-
-# WorkOrder 31152462
 
 TEMPLATES = [
     {
@@ -116,6 +116,15 @@ DATABASES = {
     }
 }
 
+
+# Google Authentication and scopes
+
+GOOGLE_API = {
+    'default': {
+        'SCOPES': ['https://spreadsheets.google.com/feeds'],
+        'JSON_KEYFILE': 'heritageSpreadsheets.json'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
